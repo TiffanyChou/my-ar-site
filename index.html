@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AR Fox</title>
+    <title>iPhone 安全版 Markerless AR</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <style>
@@ -20,37 +20,39 @@
         cursor: pointer;
         z-index: 10;
       }
+      #ar-scene {
+        display: none;
+      }
     </style>
   </head>
   <body>
     <button id="start-btn">啟動 AR</button>
-    <div id="ar-container"></div>
+
+    <a-scene
+      id="ar-scene"
+      embedded
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: true"
+      renderer="antialias: true; alpha: true"
+    >
+      <a-assets>
+        <a-asset-item id="foxModel" src="fox.glb"></a-asset-item>
+      </a-assets>
+
+      <a-entity 
+        gltf-model="#foxModel"
+        position="0 0 -2"
+        scale="2 2 2"
+        rotation="0 180 0"
+      ></a-entity>
+
+      <a-camera position="0 0 0"></a-camera>
+    </a-scene>
 
     <script>
       document.getElementById("start-btn").addEventListener("click", function () {
         this.style.display = "none";
-
-        document.getElementById("ar-container").innerHTML = `
-          <a-scene
-            embedded
-            vr-mode-ui="enabled: false"
-            device-orientation-permission-ui="enabled: true"
-            renderer="antialias: true; alpha: true"
-          >
-            <a-assets>
-              <a-asset-item id="foxModel" src="fox.glb"></a-asset-item>
-            </a-assets>
-
-            <a-entity 
-              gltf-model="#foxModel"
-              position="0 0 -2"
-              scale="2 2 2"
-              rotation="0 180 0"
-            ></a-entity>
-
-            <a-camera position="0 0 0"></a-camera>
-          </a-scene>
-        `;
+        document.getElementById("ar-scene").style.display = "block";
       });
     </script>
   </body>
