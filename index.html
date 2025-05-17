@@ -41,11 +41,11 @@
 
       <!-- 新模型通常中心點正確，這組設定可以穩定顯示 -->
       <a-entity 
-          gltf-model="#foxModel"
+    gltf-model="#foxModel"
   position="0 -2 -8"
   scale="0.2 0.2 0.2"
-  rotation="0 45 0"
-
+  rotation="0 90 0"
+  animation="property: rotation; to: 0 450 0; loop: true; dur: 5000"
       ></a-entity>
 
       <a-entity camera></a-entity>
