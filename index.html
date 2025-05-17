@@ -1,32 +1,57 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Markerless AR (No Target)</title>
+    <title>AR Fox</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <style>
       body { margin: 0; overflow: hidden; }
+      #start-btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px 40px;
+        font-size: 20px;
+        background-color: #0e76a8;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        z-index: 10;
+      }
     </style>
   </head>
   <body>
-    <a-scene
-      embedded
-      vr-mode-ui="enabled: false"
-      device-orientation-permission-ui="enabled: true"
-      renderer="antialias: true; alpha: true"
-    >
-      <a-assets>
-        <a-asset-item id="foxModel" src="fox.glb"></a-asset-item>
-      </a-assets>
+    <button id="start-btn">啟動 AR</button>
+    <div id="ar-container"></div>
 
-      <a-entity 
-        gltf-model="#foxModel"
-        position="0 0 -2"
-        scale="2 2 2"
-        rotation="0 180 0"
-      ></a-entity>
+    <script>
+      document.getElementById("start-btn").addEventListener("click", function () {
+        this.style.display = "none";
 
-      <a-camera position="0 0 0"></a-camera>
-    </a-scene>
+        document.getElementById("ar-container").innerHTML = `
+          <a-scene
+            embedded
+            vr-mode-ui="enabled: false"
+            device-orientation-permission-ui="enabled: true"
+            renderer="antialias: true; alpha: true"
+          >
+            <a-assets>
+              <a-asset-item id="foxModel" src="fox.glb"></a-asset-item>
+            </a-assets>
+
+            <a-entity 
+              gltf-model="#foxModel"
+              position="0 0 -2"
+              scale="2 2 2"
+              rotation="0 180 0"
+            ></a-entity>
+
+            <a-camera position="0 0 0"></a-camera>
+          </a-scene>
+        `;
+      });
+    </script>
   </body>
 </html>
